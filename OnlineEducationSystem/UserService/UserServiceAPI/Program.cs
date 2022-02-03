@@ -24,10 +24,10 @@ builder.Services.AddSwaggerGen(
                     Version = "1"
                 });
 
-            var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-            var xmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
+//             var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+//             var xmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
 
-            setupAction.IncludeXmlComments(xmlCommentsFullPath);
+//             setupAction.IncludeXmlComments(xmlCommentsFullPath);
             setupAction.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
             {
                 Name = "Authorization",
