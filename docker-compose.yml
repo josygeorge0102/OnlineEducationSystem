@@ -1,0 +1,110 @@
+version: '3.4'
+
+services:
+  classroomservicedb:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    user: root
+    volumes:
+      - classroomservice-sql-server-data:/var/opt/mssql/data
+    environment:
+       ACCEPT_EULA: "Y"
+       SA_PASSWORD: "Pa55word!"
+       MSSQL_PID: "Express"
+    ports:
+      - "1433:1433"
+
+  classroomserviceapi:
+    image: ${DOCKER_REGISTRY-}classroomserviceapi
+    build:
+      context: .
+      dockerfile: OnlineEducationSystem/ClassroomService/ClassroomServiceAPI/Dockerfile
+    environment:
+      ASPNETCORE_URLS: "https://+;http://+"
+      ASPNETCORE_HTTPS_PORT: "7189"
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ConnectionStrings__ClassroomServiceDB: "Server=classroomservicedb,1433;Database=ClassroomServiceDB;User ID=SA;Password=Pa55word!;MultipleActiveResultSets=true;"
+    volumes:
+      - $APPDATA\microsoft\UserSecrets\:/root/.microsoft/usersecrets
+      - $USERPROFILE\.aspnet\https\:/root/.aspnet/https/
+    ports:
+      - 5189:80
+      - 7189:443
+    depends_on:
+      - loginservicedb
+      - classroomservicedb
+      - loginserviceapi
+
+  loginservicedb:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    user: root
+    volumes:
+      - loginservice-sql-server-data:/var/opt/mssql/data
+    environment:
+       ACCEPT_EULA: "Y"
+       SA_PASSWORD: "Pa55word!"
+       MSSQL_PID: "Express"
+    ports:
+      - "1434:1433"
+
+  loginserviceapi:
+    image: ${DOCKER_REGISTRY-}loginserviceapi
+    build:
+      context: .
+      dockerfile: OnlineEducationSystem/LoginService/LoginServiceAPI/Dockerfile
+    environment:
+      ASPNETCORE_URLS: "https://+;http://+"
+      ASPNETCORE_HTTPS_PORT: "5001"
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ConnectionStrings__LoginServiceDB: "Server=loginservicedb,1433;Database=LoginServiceDB;User ID=SA;Password=Pa55word!;MultipleActiveResultSets=true;"
+    volumes:
+      - $APPDATA\microsoft\UserSecrets\:/root/.microsoft/usersecrets
+      - $USERPROFILE\.aspnet\https\:/root/.aspnet/https/
+    ports:
+      - 5001:443
+    depends_on:
+      - loginservicedb
+
+  oes.web.bff:
+    image: ${DOCKER_REGISTRY-}oeswebbff
+    build:
+      context: .
+      dockerfile: OnlineEducationSystem/OES.WEB.BFF/OES.WEB.BFF/Dockerfile
+    environment:
+      ASPNETCORE_URLS: "https://+;http://+"
+      ASPNETCORE_HTTPS_PORT: "5002"
+      ASPNETCORE_ENVIRONMENT: "Development"
+    volumes:
+      - $APPDATA\microsoft\UserSecrets\:/root/.microsoft/usersecrets
+      - $USERPROFILE\.aspnet\https\:/root/.aspnet/https/
+    ports:
+      - 5000:80
+      - 5002:443
+    depends_on:
+      - loginservicedb
+      - classroomservicedb
+      - loginserviceapi
+      - classroomserviceapi
+
+  userserviceapi:
+    image: ${DOCKER_REGISTRY-}userserviceapi
+    build:
+      context: .
+      dockerfile: OnlineEducationSystem/UserService/UserServiceAPI/Dockerfile
+    environment:
+      ASPNETCORE_URLS: "https://+;http://+"
+      ASPNETCORE_HTTPS_PORT: "7095"
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ConnectionStrings__LoginServiceDB: "Server=loginservicedb,1433;Database=LoginServiceDB;User ID=SA;Password=Pa55word!;MultipleActiveResultSets=true;"
+    volumes:
+      - $APPDATA\microsoft\UserSecrets\:/root/.microsoft/usersecrets
+      - $USERPROFILE\.aspnet\https\:/root/.aspnet/https/
+    ports:
+      - 7095:443
+      - 5095:80
+    depends_on:
+      - loginservicedb
+      - loginserviceapi
+    
+volumes:
+  classroomservice-sql-server-data: {}
+  loginservice-sql-server-data: {}

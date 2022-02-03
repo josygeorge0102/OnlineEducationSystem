@@ -1,0 +1,29 @@
+﻿All Users
+/signup
+/signup?role="teacher"&name="suyog"&gender="M"&mobile=""&email="patilsuyog2021@gmail.com"&password="Te@m5Rocks"
+/signup?role="student"&name="suyog"&gender="M"&mobile=""&dob="04/01/2022"&email="patilsuyog2021@gmail.com"&password="Te@m5Rocks"
+
+Admin
+/teachers?list=10 <= Paginated teachers list  [[GET]]
+/teachers?list=10&search="patilsuy" <= filtered paginated teachers list  [[GET]]
+/teachers/{teacher=1} <= teacher01 details [[GET]]
+/teachers/{teacher=1} => updated teacher01 details [[PATCH]]
+/teachers => delete teachers01, teachers02, teachers03 [[only selected & not all ]] [[Delete]]
+/teachers => add teacher04 [[POST]]
+
+/students?list=10 <= Paginated students list  [[GET]]
+/students?list=10&search="patilsuy" <= filtered paginated students list  [[GET]]
+/students/{student=1} <= student01 details [[GET]]
+/students/{student=1} => updated student01 details [[PATCH]]
+/students => delete students01, students02, students03 [[only selected & not all ]] [[Delete]]
+/students => add teacher04 [[POST]]
+
+
+--Implement policy based authorisation
+--can have separate actions according for each policy
+0. Get id from claims => dont need as claim id will be resource ids()
+updating users profiles
+
+1. actions
+2. authorization
+3. demo

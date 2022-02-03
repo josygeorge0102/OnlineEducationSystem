@@ -1,0 +1,69 @@
+.Main {
+  text-align: center;
+  background-color: #0b7e43;
+    display: flex;
+    //justify-content: center;
+    flex-direction: column;
+    //align-items: center;
+    height: 100vh;
+  
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.bgimg{
+  {/*background:url("C:/Users/Shuchi/Desktop/oes.jpg");*/}
+  background-color: #0b7e43;
+  height:100vh;
+  opacity:2.8;
+  background-size:cover;
+  height:auto;
+}
+.container {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  
+}
+
+pre {
+  width: 70%;
+  color: #fff;
+  font-size: larger;
+}
+
+button {
+  background: #0563b4 !important;
+}
+/*p {
+  color: red;
+}*/
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
