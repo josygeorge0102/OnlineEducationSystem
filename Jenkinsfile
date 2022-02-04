@@ -3,11 +3,14 @@ node{
     git 'https://github.com/josygeorge0102/OnlineEducationSystem.git'
   }
   stage('Docker compose build'){
-    bat 'docker compose build'
+    sh 'docker compose build'
+  }
+  stage('Docker Hub Login'){
+   sh 'docker login -u="josy98" -p="Jo27148193*"' 
   }
   
   stage('Docker compose push'){
-    bat 'docker compose push'
+    sh 'docker compose push'
   }
 }
   
