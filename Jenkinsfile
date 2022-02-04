@@ -14,19 +14,19 @@ pipeline {
     stage('Building image') {
       steps{
         script {
-          dockerImage = bat 'docker compose build'
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
       }
     }
     stage('Deploy Image') {
       steps{
-       
-         
-            bat 'docker compose push'
-          
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
         }
       }
-    
+    }
     stage('Remove Unused docker image') {
       steps{
         sh "docker rmi $registry:$BUILD_NUMBER"
