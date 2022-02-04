@@ -5,9 +5,7 @@ node{
   stage('Docker compose build'){
     bat 'docker compose build'
   }
-  stage('DockerHub Login '){
-    bat 'docker login -u="josy98" -p="Jo27148193*"' 
-  }
+  
   stage('Docker compose push'){
     bat 'docker compose push'
   }
