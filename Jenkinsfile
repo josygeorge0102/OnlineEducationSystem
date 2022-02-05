@@ -13,6 +13,8 @@ node{
        bat 'docker login oesregistry.azurecr.io -u OESRegistry -p ${azurepassword}'
        bat 'docker-compose push'
     }
+      
+    }
    
   }
 }
