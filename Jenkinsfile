@@ -14,13 +14,12 @@ node{
  
   
   stage('Docker compose push'){
-    withCredentials([string(credentialsId: 'OESRegistry', variable: 'azurepassword')]) {
      script{
         docker.withRegistry("http://${registryUrl}",registryCredential)
         bat 'docker-compose push'
      }
    } 
-   }    
+      
 }
   
    
