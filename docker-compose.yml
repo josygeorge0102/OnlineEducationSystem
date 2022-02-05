@@ -14,7 +14,7 @@ services:
       - "1433:1433"
 
   classroomserviceapi:
-    image: josy98/classroomserviceapi
+    image: oesregistry.azurecr.io/classroomserviceapi
     build:
       context: .
       dockerfile: OnlineEducationSystem/ClassroomService/ClassroomServiceAPI/Dockerfile
@@ -47,7 +47,7 @@ services:
       - "1434:1433"
 
   loginserviceapi:
-    image: josy98/loginserviceapi
+    image: oesregistry.azurecr.io/loginserviceapi
     build:
       context: .
       dockerfile: OnlineEducationSystem/LoginService/LoginServiceAPI/Dockerfile
@@ -65,7 +65,7 @@ services:
       - loginservicedb
 
   oes.web.bff:
-    image: josy98/oeswebbff
+    image: oesregistry.azurecr.io/oeswebbff
     build:
       context: .
       dockerfile: OnlineEducationSystem/OES.WEB.BFF/OES.WEB.BFF/Dockerfile
@@ -86,7 +86,7 @@ services:
       - classroomserviceapi
 
   userserviceapi:
-    image: josy98/userserviceapi
+    image: oesregistry.azurecr.io/userserviceapi
     build:
       context: .
       dockerfile: OnlineEducationSystem/UserService/UserServiceAPI/Dockerfile
