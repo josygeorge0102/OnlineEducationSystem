@@ -9,8 +9,8 @@ node{
  
   
   stage('Docker compose push'){
-     withCredentials([string(credentialsId: 'OESRegistry', variable: 'azure_registry_psw')]) {
-      bat 'docker login oesregistry.azurecr.io -u OESRegistry -p ${azure_registry_psw}'
+    withCredentials([string(credentialsId: 'OESRegistry', variable: 'azurepassword')]) {
+       bat 'docker login oesregistry.azurecr.io -u OESRegistry -p ${azurepassword}'
        bat 'docker-compose push'
     }
    
