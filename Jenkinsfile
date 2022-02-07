@@ -10,10 +10,10 @@ pipeline{
         }
        stage ('Docker Compose Push') {
             steps {               
-                withCredentials([usernamePassword(credentialsId: 'ACR', passwordVariable: 'ACR_PASSWORD', usernameVariable: 'ACR_USER')]){
-                    bat 'docker login oesregistry.azurecr.io -u $ACR_USER -p $ACR_PASSWORD'
+                
+                    bat 'docker login oesregistry.azurecr.io -u OESRegistry -p EWdqcMQEOfw8NbUGFm7=3eO5=U94c5M4'
                     bat'docker-compose push'
-                  }
+                  
             }
         }
       
